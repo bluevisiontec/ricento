@@ -35,21 +35,21 @@ class Diglin_Ricento_Model_Cron
             return;
         }
 
-		// set memory limit to 512M if current is lower
+        // set memory limit to 512M if current is lower
         $memoryLimit = ini_get('memory_limit');
-		if (preg_match('/^(\d+)(.)$/', $memoryLimit, $memoryLimitParts)) {
-			if ($memoryLimitParts[2] == 'G') {
-				$memoryLimit = $memoryLimitParts[1] * 1024 * 1024 * 1024;
-			} else if ($memoryLimitParts[2] == 'M') {
-				$memoryLimit = $memoryLimitParts[1] * 1024 * 1024;
-			} else if ($memoryLimitParts[2] == 'K') {
-				$memoryLimit = $memoryLimitParts[1] * 1024;
-			}
-		}
-		if($memoryLimit < 512*1024*1024 && $memoryLimit > 0) {
-			ini_set('memory_limit', '512M');
-		}
-		
+        if (preg_match('/^(\d+)(.)$/', $memoryLimit, $memoryLimitParts)) {
+            if ($memoryLimitParts[2] == 'G') {
+                $memoryLimit = $memoryLimitParts[1] * 1024 * 1024 * 1024;
+            } else if ($memoryLimitParts[2] == 'M') {
+                $memoryLimit = $memoryLimitParts[1] * 1024 * 1024;
+            } else if ($memoryLimitParts[2] == 'K') {
+                $memoryLimit = $memoryLimitParts[1] * 1024;
+            }
+        }
+        if($memoryLimit < 512*1024*1024 && $memoryLimit > 0) {
+            ini_set('memory_limit', '512M');
+        }
+    
         //** Launch Pending Jobs
 
         // @todo check that the API token is not expired or that an error may occur, in this case send only once an email to the admin

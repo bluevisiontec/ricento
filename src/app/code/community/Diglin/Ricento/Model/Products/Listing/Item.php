@@ -453,9 +453,21 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
 
                 if ($imageExtension) {
                     $picture = new ArticlePictureParameter();
+                    
+                    // downscale big images to prevent errors
+                    $imagePath = $image['filepath'];
+                    $imageInfo = pathinfo($imagePath);
+                    $newImagePath = $imageInfo['dirname']."/".$imageInfo['basename']."_ricardo".$imageInfo['extension'];
+                    
+                    $imageObj = new Varien_Image($imagePath);
+                    $imageObj->constrainOnly(TRUE);
+                    $imageObj->keepAspectRatio(TRUE);
+                    $imageObj->resize(800);
+                    $imageObj->save($newImagePath);
+                    
                     $picture
                         // we encode in Json to minimize memory consumption
-                        ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($image['filepath'])))))
+                        ->setPictureBytes(json_encode(array_values(unpack('C*', file_get_contents($newImagePath)))))
                         ->setPictureExtension($imageExtension)
                         ->setPictureIndex(++$i);
 

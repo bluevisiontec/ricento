@@ -508,6 +508,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         foreach ($images as &$image) {
             if (isset($image['filepath'])) {
                 $image['filepath'] = $mediaConfig->getMediaPath($image['filepath']);
+                Mage::log($image['filepath']);
             }
         }
 
@@ -570,7 +571,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             ->where('store_id = 0')
             ->where('attribute_code = ?', 'image');
 
-        return array_merge($mediaGallery, $read->fetchAll($select));
+        return array_merge($read->fetchAll($select),$mediaGallery);
     }
 
     /**

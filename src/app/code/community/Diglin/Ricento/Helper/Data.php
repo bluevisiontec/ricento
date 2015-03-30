@@ -52,6 +52,11 @@ class Diglin_Ricento_Helper_Data extends Mage_Core_Helper_Abstract
     const CFG_DECREASE_INVENTORY            = 'ricento/global/decrease_inventory';
 
     /**
+     * Product listing global config
+     */
+    const CFG_LISTING_NL2BR                 = 'ricento/listing_config/description_nl2br';
+    
+    /**
      * Cleanup Job config
      */
     const CFG_CLEAN_JOBS_ENABLED            = 'ricento/cleanup_jobs/enabled';

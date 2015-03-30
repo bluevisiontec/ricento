@@ -33,6 +33,9 @@
                 <email_account_creation>0</email_account_creation>
                 <email_order_creation>0</email_order_creation>
             </global>
+            <listing_config>
+                <description_nl2br>1</description_nl2br>
+            </listing_config>
             <api_config>
                 <enabled>1</enabled>
                 <dev_mode>1</dev_mode>

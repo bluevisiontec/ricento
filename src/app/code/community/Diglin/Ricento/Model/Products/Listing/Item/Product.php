@@ -508,7 +508,6 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
         foreach ($images as &$image) {
             if (isset($image['filepath'])) {
                 $image['filepath'] = $mediaConfig->getMediaPath($image['filepath']);
-                Mage::log($image['filepath']);
             }
         }
 
@@ -728,7 +727,10 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
             ->where('`cpet`.`entity_id` = ?', $productId)
             ->where('`cpet`.`store_id` = ?', $storeId);
 
-        return $readConnection->fetchOne($select);
+        // run template processor filter to replace cms variables
+        $desc = $readConnection->fetchOne($select);
+        $templateProcessor = Mage::helper('cms')->getBlockTemplateProcessor();
+        return $templateProcessor->filter($desc);
     }
 
     /**

@@ -58,11 +58,14 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
             $this->setDefaultFilter(array('in_category' => 1));
         }
 
+        $store = Mage::app()->getWebsite($this->getListing()->getWebsiteId())->getDefaultStore();
+        
         $collection = Mage::getResourceModel('catalog/product_collection')
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('sku')
             ->addAttributeToSelect('type_id')
             ->addAttributeToSelect('price')
+            ->setStoreId($store->getId())
             ->addWebsiteFilter($this->getListing()->getWebsiteId())
             ->joinField('stock_qty',
                 'cataloginventory/stock_item',
@@ -109,7 +112,6 @@ class Diglin_Ricento_Block_Adminhtml_Products_Listing_Edit_Tabs_Products
         $collection->addFieldToFilter('entity_id', array('in'=>$productIds));
 
         $this->getColumn('massaction')->setUseIndex(true);
-
 
         $this->setCollection($collection);
         return parent::_prepareCollection();

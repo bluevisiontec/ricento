@@ -315,7 +315,8 @@ class Diglin_Ricento_Model_Products_Listing_Item extends Mage_Core_Model_Abstrac
         // We take the price from default store view
         $productPrice = $this->getProduct()
             ->setProductId($this->getBaseProductId())
-            ->setStoreId($this->getDefaultStoreId())
+//             ->setStoreId($this->getDefaultStoreId())
+            ->setStoreId($this->getProductsListing()->getLangStoreIdDe())
             ->getPrice();
 
         // if child of configurable add the product variation depending on the options (options are ordered by position normally)

@@ -777,7 +777,7 @@ class Diglin_Ricento_Model_Products_Listing_Item_Product
                 array()
             )
             ->where('`cped`.`entity_id` = ?', (int) $this->getProductId())
-            ->where('`cped`.`store_id` = ?', $this->_defaultStoreId);
+            ->where('`cped`.`store_id` = ?', $this->getStoreId());
 
         $price = $readConnection->fetchOne($select);
 
